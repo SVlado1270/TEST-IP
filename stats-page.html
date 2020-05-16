@@ -41,6 +41,11 @@
                         <li><a href="#" class="stats-btn" onclick="getComm()">Get all comments</a></li>
                         <li><a href="#" class="stats-btn" onclick="getLastComms()">Get last 3 comms</a></li>
                         <li><a href='#' class="stats-btn" onclick="getPostText()">Get post text </a></li>
+                        <li><a href='#' class="stats-btn" onclick="avg_LikesFB()">Avg Likes Time </a></li>
+                        <li><a href='#' class="stats-btn" onclick="avg_CommsFB()">Avg Comms Time </a></li>
+                        <li><a href='#' class="stats-btn" onclick="avg_SharesFB()">Avg Shares Time </a></li>
+                        <li><a href='#' class="stats-btn" onclick="mostSharedFacebook()">Most Shared Post </a></li>
+                        <li><a href='#' class="stats-btn" onclick="popularHashTagFacebook()">Popular hashtag</a></li>
                     </ul>
                 </div>
             </div>
@@ -55,6 +60,7 @@
                         <li><a href="#" class="stats-btn" onclick="retrieveStats()">View Stats</a></li>
                         <li><a href="#" class="stats-btn" onclick="retrieveProfileTwitter()">Account Name</a></li>
                         <li><a href="#" class="stats-btn" onclick="retrieveFollowersTwitter()">Daily Followers Count</a></li>
+                        <li><a href='#' class="stats-btn" onclick="retrieveDailyStatsTwitter()">Daily Stats</a></li>
                         <!-- GET http://sma-a4.herokuapp.com/<platform>/profile -->
                     </ul>
                 </div>
@@ -69,6 +75,9 @@
                         <li><a href="#" class="stats-btn" onclick="getAllCommsFlickr ()">All Comments</a></li>
                         <li><a href="#" class="stats-btn" onclick="getLast3CommsFlickr()">Last 3 comments</a></li>
                         <li><a href="#" class="stats-btn" onclick="getUsername()">Account Name</a></li>
+                        <li><a href="#" class="stats-btn" onclick="popularHashTagFlickr()">Popular hashtag</a></li>
+                        <li><a href='#' class="stats-btn" onclick="avg_FavesFlickr()">Avg Faves Time </a></li>
+                        <li><a href='#' class="stats-btn" onclick="avg_CommsFlickr()">Avg Comms Time </a></li>
                     </ul>
                 </div>
 
@@ -100,6 +109,7 @@
                         <li><a href="#" class="stats-btn" onclick="retrievePostInfoLinkedin()">View post stats</a></li>
                         <li><a href="#" class="stats-btn" onclick="getStatisticsLinkedin()">Platform statistics</a></li>
                         <li><a href='#' class="stats-btn" onclick="retrieveFollowersLinked()">Daily Followers Count</a></li>
+                        <li><a href='#' class="stats-btn" onclick="retrieveDailyStatsLinkedIn()">Daily Stats</a></li>
                     </ul>
                 </div>
             </div>
@@ -110,7 +120,7 @@
             <div class="custom-select">
                 <span> Select Time Interval for your favorite platform</span>
                 <div class="styled-select slate">
-                    <select class="fb">
+                    <select class="fb" id="select_time" onchange="set_time()">
                     <option value="0">Select Time Interval:</option>
                     <option value="1">Daily</option>
                     <option value="2">This Week</option>
@@ -120,6 +130,8 @@
             </div>
             <div class="wrapper-content" id="content-area" style="overflow-y: scroll; border-bottom: 0px;"></div>
     </section>
+    <script src="hashTagFacebook.js"></script>
+    <script src="hashTagFlickr.js"></script>
     <script src="retrieveDailyStats.js"></script>
     <script src="retrieveDailyFollowers.js"></script>
     <script src="retrievePostsRanking.js"></script>
@@ -142,6 +154,13 @@
     <script src="GetBestPost.js"></script>
     <script src="getUsername.js"></script>
     <script src="getFavesCount.js"></script>
+    <script src="time_scripts.js"></script>
+    <script src="AvgShares_Interval_FB.js"></script>
+    <script src="AvgComms_Interval_FB.js"></script>
+    <script src="AvgLikes_Interval_FB.js"></script>
+    <script src="AvgFaves_Interval_Flickr.js"></script>
+    <script src="AvgComms_Interval_Flickr.js"></script>
+    <script src="mostSharedFacebook.js"></script>
     <script type="text/javascript" src="GetAllComms.js">
         console.log(sessionStorage.getItem("fbId"));
     </script>

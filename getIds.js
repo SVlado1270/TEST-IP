@@ -20,7 +20,7 @@ function getBestPostsID() {
 
 function getPostID_FB() {
 	var xhttp;
-    var url = "https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?do=getBestPost&fbid=" + sessionStorage.getItem("id_user");
+    var url = "https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?do=getBestPost&jwt=" + sessionStorage.getItem("token");
 
     //console.log(url1);
 
@@ -33,7 +33,7 @@ function getPostID_FB() {
 
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
-            //console.log(xhttp.response);
+            console.log(xhttp.response);
             var obj = JSON.parse(xhttp.responseText);
             postID = obj.PAGE_IDS[0];
             //console.log(postID);
@@ -48,7 +48,7 @@ function getPostID_FB() {
 
 function getPostID_FLICKR() {
 	var xhttp;
-    var url1 = "https://web-rfnl5hmkocvsi.azurewebsites.net/DPZ/REST.php?do=getBestPost&userid=" + sessionStorage.getItem("id_user");
+    var url1 = "https://web-rfnl5hmkocvsi.azurewebsites.net/DPZ/REST.php?do=getBestPost&token=" + sessionStorage.getItem("token");
 
     //console.log(url1);
 

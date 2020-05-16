@@ -5,7 +5,7 @@ function getFavesCount() {
     //var postId = '49765475798';
     var postId = sessionStorage.getItem("postID_FLICKR");
     var data = 'https://web-rfnl5hmkocvsi.azurewebsites.net/DPZ/REST.php?do=getFaveCount';
-    var url = `${data}&postId=${postId}&token=${token}`;
+    var url = `${data}&postId=${postId}&token=${sessionStorage.getItem('token')}`;
     console.log(url);
 
     var displayed = 0;

@@ -14,7 +14,7 @@ function getUsername() {
 
     xhttp.onreadystatechange = function() {
 
-        console.log('sunt aici');
+        //console.log('sunt aici');
         if (this.readyState == 4 && this.status == 200) {
 
             console.log(xhttp.response);
@@ -31,7 +31,7 @@ function getUsername() {
                 location.reload()
                 displayed++
             }
-            console.log('sunt aici bad');
+            //console.log('sunt aici bad');
         }
 
     };
