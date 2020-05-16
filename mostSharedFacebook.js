@@ -21,46 +21,52 @@ function mostSharedFacebook() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             console.log(xhttp.response);
             var obj = JSON.parse(xhttp.responseText);
-            postID = obj.PAGE_IDS[0];
+            postID = obj.mostShared;
             console.log(postID);
-            sessionStorage.setItem('postID', obj.PAGE_IDS[0]);
+            sessionStorage.setItem('postID', obj.mostShared);
             //console.log(postID);
         }
     }
     xhttp.open("GET", requestData, true);
     xhttp.send(null);
 
-    var xhttp2;
-    var url1 = 'https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?';
-    var getText = 'getText';
-
-    const requestData2 = `${url1}do=${getText}&postId=${postId}&jwt=${jwt}`;
-    console.log(requestData2);
-
-    if (window.XMLHttpRequest) {
-        xhttp2 = new XMLHttpRequest()
+    if (sessionStorage.getItem('postID') === '0') {
+        removeChilds();
+        modifyHTMLMostShared('Nu exista posturi share-uite.');
     } else {
-        xhttp2 = new ActiveXObject('Microsoft.XMLHTTP')
-    };
+        var xhttp2;
+        var url1 = 'https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?';
+        var getText = 'getText';
 
-    xhttp2.onreadystatechange = function() {
-        if (xhttp2.readyState == 4 && xhttp2.status == 200) {
-            console.log(xhttp2.response);
-            removeChilds();
-            var obj2 = JSON.parse(xhttp2.responseText);
-            alert_message = obj2.MESSAGE;
-            modifyHTMLMostShared(alert_message);
-            console.log('Get most shared post ' + alert_message);
-            //alert(alert_message);
+        const requestData2 = `${url1}do=${getText}&postId=${postId}&jwt=${jwt}`;
+        console.log(requestData2);
 
+        if (window.XMLHttpRequest) {
+            xhttp2 = new XMLHttpRequest()
         } else {
-            console.log('eroare de aia mare');
-        }
+            xhttp2 = new ActiveXObject('Microsoft.XMLHTTP')
+        };
+
+        xhttp2.onreadystatechange = function() {
+            if (xhttp2.readyState == 4 && xhttp2.status == 200) {
+                console.log(xhttp2.response);
+                removeChilds();
+                var obj2 = JSON.parse(xhttp2.responseText);
+                alert_message = obj2.MESSAGE;
+                modifyHTMLMostShared(alert_message);
+                console.log('Get most shared post ' + alert_message);
+                //alert(alert_message);
+
+            } else {
+                console.log('eroare de aia mare');
+            }
 
 
-    };
-    xhttp2.open('GET', requestData2, true);
-    xhttp2.send(null);
+        };
+
+        xhttp2.open('GET', requestData2, true);
+        xhttp2.send(null);
+    }
 }
 
 function modifyHTMLMostShared(comentariu) {
