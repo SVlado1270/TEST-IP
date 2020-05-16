@@ -33,7 +33,7 @@ function retrieveFollowersTwitter() {
     if (count == 0) {
       count = 1
       console.log(url+platforma+actiune+'stats')
-      this.open('GET', url + platforma + actiune + 'stats', true)
+      this.open('GET', url + platforma + actiune + "stats?date_begin=" + sessionStorage.getItem('date_begin') + "&date_end=" + sessionStorage.getItem('date_end'), true)
       this.send()
     }
   }
@@ -48,7 +48,7 @@ function modifyHTMLTwit(automatic, followers, timestamp) {
   var followers_p = document.createElement('p')
   var timestamp_p = document.createElement('p')
 
-  var heading_n = document.createTextNode('Your daily followers count: ')
+  var heading_n = document.createTextNode('Your daily followers count from Twitter: ')
   var automatic_n = document.createTextNode('Automatic: ' + automatic)
   var followers_n = document.createTextNode('Number of followers: ' + followers)
   var timestamp_n = document.createTextNode('Timestamp: ' + timestamp)
@@ -65,13 +65,6 @@ function modifyHTMLTwit(automatic, followers, timestamp) {
 
   var original = document.getElementById('content-area')
   original.append(elem)
-}
-
-function removeChildren() {
-  const myNode = document.getElementById('content-area')
-  while (myNode.lastElementChild) {
-    myNode.removeChild(myNode.lastElementChild)
-  }
 }
 
 function retrieveFollowersTumblr() {
@@ -108,7 +101,7 @@ function retrieveFollowersTumblr() {
       } else { tempo++ }
       if (count == 0) {
         count = 1
-        this.open('GET', url + platforma + actiune + 'stats', true)
+        this.open('GET', url + platforma + actiune + "stats?date_begin=" + sessionStorage.getItem('date_begin') + "&date_end=" + sessionStorage.getItem('date_end'), true)
         this.send()
       }
     }
@@ -123,7 +116,7 @@ function retrieveFollowersTumblr() {
     var followers_p = document.createElement('p')
     var timestamp_p = document.createElement('p')
   
-    var heading_n = document.createTextNode('Your daily followers count: ')
+    var heading_n = document.createTextNode('Your daily followers count from Tumblr: ')
     var automatic_n = document.createTextNode('Automatic: ' + automatic)
     var followers_n = document.createTextNode('Number of followers: ' + followers)
     var timestamp_n = document.createTextNode('Timestamp: ' + timestamp)
@@ -140,13 +133,6 @@ function retrieveFollowersTumblr() {
   
     var original = document.getElementById('content-area')
     original.append(elem)
-  }
-  
-  function removeChildren() {
-    const myNode = document.getElementById('content-area')
-    while (myNode.lastElementChild) {
-      myNode.removeChild(myNode.lastElementChild)
-    }
   }
   
   function retrieveFollowersLinked() {
@@ -183,7 +169,7 @@ function retrieveFollowersTumblr() {
       } else { tempo++ }
       if (count == 0) {
         count = 1
-        this.open('GET', url + platforma + actiune + 'stats', true)
+        this.open('GET', url + platforma + actiune + "stats?date_begin=" + sessionStorage.getItem('date_begin') + "&date_end=" + sessionStorage.getItem('date_end'), true)
         this.send()
       }
     }
@@ -198,7 +184,7 @@ function retrieveFollowersTumblr() {
     var followers_p = document.createElement('p')
     var timestamp_p = document.createElement('p')
   
-    var heading_n = document.createTextNode('Your daily followers count: ')
+    var heading_n = document.createTextNode('Your daily followers count from LinkedIn: ')
     var automatic_n = document.createTextNode('Automatic: ' + automatic)
     var followers_n = document.createTextNode('Number of followers: ' + followers)
     var timestamp_n = document.createTextNode('Timestamp: ' + timestamp)

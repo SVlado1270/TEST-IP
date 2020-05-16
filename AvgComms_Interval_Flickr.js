@@ -1,6 +1,6 @@
-function avg_LikesFB() {
+function avg_CommsFlickr() {
     var xhttp;
-    var url = "https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?do=avgLikesTime&jwt=" +  sessionStorage.getItem('token') + "&begin=" + sessionStorage.getItem('date_begin') + "&end=" + sessionStorage.getItem('date_end')
+    var url = "https://web-rfnl5hmkocvsi.azurewebsites.net/DPZ/REST.php?do=getAverageCommentsBetween&token=" +  sessionStorage.getItem('token') + "&begin=" + sessionStorage.getItem('date_begin') + "&end=" + sessionStorage.getItem('date_end')
     console.log(url);
 
     var displayed = 0;
@@ -24,8 +24,14 @@ function avg_LikesFB() {
     
             removeChildren()
         
-            alert_message = alert_message + 'tag: ' + obj.LIKEAVG;
-            modifyHTML3(obj.LIKEAVG)
+            alert_message = alert_message + obj.AVERAGECOMMENTS;
+            console.log(obj.AVERAGECOMMENTS)
+            if(alert_message === "undefined"){
+                modifyHTML7(obj.ERROR,'0');
+            }
+            else{
+                modifyHTML7(obj.AVERAGECOMMENTS,obj.TOTAL)
+            }
             
             console.log(alert_message)
 
@@ -44,15 +50,19 @@ function avg_LikesFB() {
     xhttp.send(null);
 }
 
-function modifyHTML3 (hashtag) {
+function modifyHTML7 (faves,total) {
     var elem = document.createElement('div')
-    var tag_p = document.createElement('p')
+    var faves_p = document.createElement('p')
+    var total_p = document.createElement('p')
 
-    var tag_d = document.createTextNode('Average likes: ' + hashtag)
+    var faves_d = document.createTextNode('Average comments: ' + faves)
+    var total_d = document.createTextNode('Total: ' + total)
 
-    tag_p.appendChild(tag_d)
+    faves_p.appendChild(faves_d)
+    total_p.appendChild(total_d)
 
-    elem.appendChild(tag_p)
+    elem.appendChild(faves_p)
+    elem.appendChild(total_p)
 
     var original = document.getElementById('content-area')
     original.append(elem)

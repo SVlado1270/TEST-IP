@@ -1,6 +1,6 @@
-function avg_LikesFB() {
+function avg_CommsFB() {
     var xhttp;
-    var url = "https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?do=avgLikesTime&jwt=" +  sessionStorage.getItem('token') + "&begin=" + sessionStorage.getItem('date_begin') + "&end=" + sessionStorage.getItem('date_end')
+    var url = "https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?do=avgCommsTime&jwt=" +  sessionStorage.getItem('token') + "&begin=" + sessionStorage.getItem('date_begin') + "&end=" + sessionStorage.getItem('date_end')
     console.log(url);
 
     var displayed = 0;
@@ -24,8 +24,8 @@ function avg_LikesFB() {
     
             removeChildren()
         
-            alert_message = alert_message + 'tag: ' + obj.LIKEAVG;
-            modifyHTML3(obj.LIKEAVG)
+            alert_message = alert_message + 'tag: ' + obj.AVGCOMMS;
+            modifyHTML4(obj.AVGCOMMS)
             
             console.log(alert_message)
 
@@ -44,11 +44,11 @@ function avg_LikesFB() {
     xhttp.send(null);
 }
 
-function modifyHTML3 (hashtag) {
+function modifyHTML4 (hashtag) {
     var elem = document.createElement('div')
     var tag_p = document.createElement('p')
 
-    var tag_d = document.createTextNode('Average likes: ' + hashtag)
+    var tag_d = document.createTextNode('Average comments: ' + hashtag)
 
     tag_p.appendChild(tag_d)
 
