@@ -16,6 +16,7 @@
     <script src="postTumblr.js"></script>
     <script src="postLinkedin.js"></script>
     <script src="postScript.js"></script>
+
     <title>Post Page</title>
 </head>
 
@@ -50,33 +51,18 @@
     <section class="main">
         <div class="custom-select">
             <div class="styled-select slate">
-                <select class="fb">
+                <select class="fb" id="facebook-pages">
                 <option value="0">Select Facebook page:</option>
-                <option value="1">Page 1</option>
-                <option value="2">Page 2</option>
-                <option value="3">Page 3</option>
-                <option value="4">Page 4</option>
-                <option value="5">Page 5</option>
               </select>
             </div>
             <div class="styled-select slate">
-                <select class="linked">
+                <select class="linked" id="linkedin-pages">
                 <option value="0">Select Linkedin page:</option>
-                <option value="1">Page 1</option>
-                <option value="2">Page 2</option>
-                <option value="3">Page 3</option>
-                <option value="4">Page 4</option>
-                <option value="5">Page 5</option>
               </select>
             </div>
             <div class="styled-select slate tumblr">
-                <select class="tumblr">
+                <select class="tumblr" id="tumblr-pages">
                 <option value="0">Select Tumblr page:</option>
-                <option value="1">Page 1</option>
-                <option value="2">Page 2</option>
-                <option value="3">Page 3</option>
-                <option value="4">Page 4</option>
-                <option value="5">Page 5</option>
               </select>
             </div>
         </div>
@@ -110,12 +96,11 @@
             </div>
         </div>
     </section>
-
-    <script type=text/javascript>
-        console.log("HELLO FROM MAIN");
-        console.log(sessionStorage.getItem("id_user"));
-    </script>
     <script src="getIds.js"></script>
+    <script src="getFacebookPages.js"></script>
+    <script src="getLinkedInPages.js"></script>
+    <script src="getTumblrPages.js"></script>
+    <!-- <script src="setDefaultPagesTumblrLinkedIn.js"></script>-->
 </body>
 
 </html>

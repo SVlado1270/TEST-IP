@@ -92,7 +92,7 @@ function postMessage_fb() {
     var url = "https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?do=PostMessage";
     var jwt = sessionStorage.getItem("token");
     var message = document.getElementById("source").value;
-    console.log(message);
+    getSelectedPage("facebook");
 
     var requestedData = `${url}&messenger=${message}&token=${jwt}&submit=Message`;
     console.log(requestedData);
@@ -118,6 +118,26 @@ function postMessage_fb() {
     }
     xhttp.open('GET', requestedData, true);
     xhttp.send(null);
+}
+/*Get selected Page FACEBOOK */
+function getSelectedPage(platform) {
+    if (platform == "facebook") {
+        const fb = document.getElementById("facebook-pages");
+        let fb_option = fb.options[fb.selectedIndex].value;
+        console.log("Facebook Page: " + fb_option);
+        return fb.options[fb.selectedIndex];
+    } else if (platform === "tumblr") {
+        const tum = document.getElementById("tumblr-pages");
+        let tumblr_option = tum.options[tum.selectedIndex].value;
+        console.log("Facebook Page: " + tumblr_option);
+        return tum.options[tum.selectedIndex];
+    } else if (platform === "linkedin") {
+        const link = document.getElementById("linkedin-pages");
+        let linked_option = link.options[link.selectedIndex].value;
+        console.log("Facebook Page: " + linked_option);
+        return link.options[link.selectedIndex];
+    }
+
 }
 
 function post_Twitter() {
