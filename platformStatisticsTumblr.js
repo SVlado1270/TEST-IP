@@ -58,7 +58,7 @@ function getStatisticsTumblr(){
             var shares_sum_p = document.createElement('p')
             var shares_avg_p = document.createElement('p')
 
-            var node = document.createTextNode('Post Stats')
+            var node = document.createTextNode('Platform statistics:')
             var comments_avg_n = document.createTextNode('Average number comments: ' +comments_avg)
             var comments_sum_n = document.createTextNode('Sum number comments: ' + comments_sum)
             var likes_avg_n = document.createTextNode('Average number likes: ' + likes_avg)
