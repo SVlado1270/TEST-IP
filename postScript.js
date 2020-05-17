@@ -92,9 +92,14 @@ function postMessage_fb() {
     var url = "https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?do=PostMessage";
     var jwt = sessionStorage.getItem("token");
     var message = document.getElementById("source").value;
-    getSelectedPage("facebook");
-
-    var requestedData = `${url}&messenger=${message}&token=${jwt}&submit=Message`;
+    let selectedPage = getSelectedPage("facebook");
+    console.log(selectedPage);
+    var requestedData;
+    if (selectedPage === 0) {
+        requestedData = `${url}&messenger=${message}&jwt=${jwt}&submit=Message`;
+    } else {
+        requestedData = `${url}&messenger=${message}&jwt=${jwt}&paginaId=${selectedPage}&submit=Message`;
+    }
     console.log(requestedData);
 
     var displayed = 0
@@ -124,18 +129,15 @@ function getSelectedPage(platform) {
     if (platform == "facebook") {
         const fb = document.getElementById("facebook-pages");
         let fb_option = fb.options[fb.selectedIndex].value;
-        console.log("Facebook Page: " + fb_option);
-        return fb.options[fb.selectedIndex];
+        return fb_option;
     } else if (platform === "tumblr") {
         const tum = document.getElementById("tumblr-pages");
         let tumblr_option = tum.options[tum.selectedIndex].value;
-        console.log("Facebook Page: " + tumblr_option);
-        return tum.options[tum.selectedIndex];
+        return tumblr_option;
     } else if (platform === "linkedin") {
         const link = document.getElementById("linkedin-pages");
         let linked_option = link.options[link.selectedIndex].value;
-        console.log("Facebook Page: " + linked_option);
-        return link.options[link.selectedIndex];
+        return linked_option;
     }
 
 }
@@ -211,7 +213,16 @@ function post_Linkedin() {
     const url = "https://sma-a4.herokuapp.com/";
     const nume_platforma = "linkedin/";
     const actiune = "post";
-
+    /*get Page to post on */
+    let selectedPage = getSelectedPage("linkedin");
+    console.log(selectedPage);
+    let address;
+    if (selectedPage == 0) {
+        address = url + nume_platforma + actiune;
+    } else {
+        address = url + nume_platforma + actiune + "?" + selectedPage;
+    }
+    console.log('Adresa' + address);
     var id = sessionStorage.getItem("id_user");
     var message = document.getElementById("source").value;
     var image = document.getElementById("test_image").files[0];
@@ -248,7 +259,7 @@ function post_Linkedin() {
         if (count == 0) {
             count = 1;
 
-            this.open("POST", url + nume_platforma + actiune, true);
+            this.open("POST", address, true);
             this.send(fd);
         }
     };
@@ -262,6 +273,16 @@ function post_Tumblr() {
     const nume_platforma = "tumblr/"
     const actiune = "post"
 
+    /*get Page to post on */
+    let selectedPage = getSelectedPage("tumblr");
+    console.log(selectedPage);
+    let address;
+    if (selectedPage === 0) {
+        address = url + nume_platforma + actiune;
+    } else {
+        address = url + nume_platforma + actiune + "?" + selectedPage;
+    }
+
     var id = sessionStorage.getItem("id_user");
     var message = document.getElementById("source").value;
     var image = document.getElementById("test_image").files[0];
@@ -298,7 +319,7 @@ function post_Tumblr() {
         if (count == 0) {
             count = 1;
 
-            this.open("POST", url + nume_platforma + actiune, true);
+            this.open("POST", address, true);
             this.send(fd);
         }
     };
@@ -384,10 +405,20 @@ function postImage_fb() {
             console.log(response.data);
             image_url = response.data.link;
             /*al doilea request*/
+
             var url = "https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?do=PostImage&";
             var jwt = sessionStorage.getItem("token");
             var message = document.getElementById("source").value;
-            var requestedData = `${url}image=${image_url}&mesaj=${message}&token=${jwt}&submit=Image`;
+            /*Get selected Page */
+            let selectedPage = getSelectedPage("facebook");
+            console.log(selectedPage);
+            var requestedData;
+            if (selectedPage == 0) {
+                requestedData = `${url}image=${image_url}&mesaj=${message}&jwt=${jwt}&submit=Image`;
+            } else {
+                requestedData = `${url}image=${image_url}&mesaj=${message}&jwt=${jwt}&paginaId=${selectedPage}&submit=Image`;
+            }
+
             console.log(requestedData);
 
             var displayed = 0;
@@ -426,9 +457,17 @@ function postImage_fb() {
 function postURL_fb() {
     var urlLocal = getUrl();
     console.log(urlLocal);
-    var url = "https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?submit=Url&do=PostUrl&jwt=" + sessionStorage.getItem("token") + "&url=" + urlLocal + "&mesaj=" + document.getElementById("source").value;
-    console.log(document.getElementById("source").value);
-    console.log(url);
+    /*Get Selected Page */
+    let selectedPage = getSelectedPage("facebook");
+    console.log('Pagina selectata in POST URL' + selectedPage);
+    var url = "https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?submit=Url&do=PostUrl&jwt="
+    let address;
+    if (selectedPage == 0) {
+        address = `${url}${sessionStorage.getItem("token")}&url=${urlLocal}&mesaj=${document.getElementById("source").value}`;
+    } else {
+        address = `${url}${sessionStorage.getItem("token")}&url=${urlLocal}&mesaj=${document.getElementById("source").value}&paginaId=${selectedPage}`;
+    }
+    console.log(address);
 
     var displayed = 0
     if (window.XMLHttpRequest) {
@@ -448,6 +487,6 @@ function postURL_fb() {
             }
         }
     }
-    xhttp.open('GET', url, true);
+    xhttp.open('GET', address, true);
     xhttp.send(null);
 }
