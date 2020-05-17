@@ -1,7 +1,9 @@
 //http://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?do=getComments&postId=(aici pui tu id-ul postului la care vrei sa afli comms)&fbid=userID
 function getComm() {
 
-    var url = 'https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?';
+    //var url = 'https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?';
+    var url = 'https://web-rfnl5hmkocvsi.azurewebsites.net/FBFINAL/REST.php?do=getComments&postId=112510383726603_127510862226555&jwt=' + sessionStorage.getItem('token');
+
     var get_comm = 'getComments';
     //var postId = '112510383726603_127510862226555';
     //var postId = "112510383726603_128873248756983"; //VLADOOO
@@ -25,6 +27,7 @@ function getComm() {
             console.log(xhttp.response);
 
             var obj = JSON.parse(this.responseText);
+            console.log(obj);
             alert_message = "";
             removeChilds();
             for (var i = 0; i < obj.COMMENTS.length; i++) {
@@ -40,7 +43,7 @@ function getComm() {
 
     };
 
-    xhttp.open("GET", requestData, true);
+    xhttp.open("GET", url, true);
     xhttp.send(null);
 
 }
